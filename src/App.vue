@@ -8,6 +8,8 @@
             <Message v-if="message" :message="message"/>
                   <!--new note-->
             <NewNote :note="note"  @addNote="addNote" />
+<!--            <div :class="{high: hi}" @click="setHigh">important</div>-->
+<!--            <div :class="{low: low}" @click="setLow">Huimportant</div>-->
 
                   <!--note title-->
             <div class="note-title" style="margin-top: 20px">
@@ -19,6 +21,8 @@
                       placeholder="Find your note"
                       value=""
               />
+
+
 
               <div class="icons">
                 <svg :class="{active: grid}" @click="grid = true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -34,8 +38,9 @@
                 </svg>
               </div>
             </div>
+
                   <!--note list-->
-            <Notes :notes="notesFilter"  :grid="grid" @remove="removeNote" />
+            <Notes :notes="notesFilter" :grid="grid" @remove="removeNote" />
           </div>
         </div>
       </section>
@@ -50,6 +55,7 @@ import Message from "@/components/Message";
 import NewNote from "@/components/NewNote";
 import Notes from "@/components/Notes";
 import Search from "@/components/Search";
+import notes from "@/components/Notes";
 
 export default {
   components: {Notes, NewNote, Message, Search},
@@ -58,25 +64,39 @@ export default {
       title: 'Notes App',
       message: null,
       grid: true,
+      hi: false,
+      low: false,
       search: '',
       note: {
         title: '',
-        description: ''
+        description: '',
+        highPriority: false,
+        lowPriority: false,
+        veryHighPriority: false,
       },
       notes: [
         {
           title: 'First note',
           description: 'Desc for first note',
+          highPriority: true,
+          lowPriority: false,
+          veryHighPriority: false,
           date: new Date(Date.now()).toLocaleString()
         },
         {
           title: 'Second note',
           description: 'Desc for Second note',
+          highPriority: false,
+          lowPriority: true,
+          veryHighPriority: false,
           date: new Date(Date.now()).toLocaleString()
         },
         {
           title: 'Third note',
           description: 'Desc for Third note',
+          highPriority: false,
+          lowPriority: false,
+          veryHighPriority: true,
           date: new Date(Date.now()).toLocaleString()
         },
       ]
@@ -100,12 +120,34 @@ export default {
     }
   },
   methods: {
+    toggleHi () {
+      this.note.hi = !this.notes.hi
+    },
+    // setVeryHigh() {this.note.priority.veryHigh = true},
+    setHigh() {
+      this.note.highPriority = true;
+      // if (this.low) {
+      //   this.low = false
+      //   this.hi = true
+      // }else{
+      // this.hi = !this.hi}
+
+    },
+    setLow() {
+      if (this.hi) {
+        this.hi = false
+        this.low = true
+      }else{
+        this.low = !this.low
+      }
+
+    },
     reset(){
       this.note.title = '';
       this.note.description = ''
     },
     addNote () {
-      let {title, description} = this.note;
+      let {title, description, highPriority, lowPriority, veryHighPriority} = this.note;
 
       if (title === '' || description === '') {
         this.message = 'You note is empty';
@@ -114,8 +156,13 @@ export default {
         this.notes.push({
           title,
           description,
+          highPriority,
+          lowPriority,
+          veryHighPriority,
           date: new Date(Date.now()).toLocaleString()
+
         })
+        console.log(this.notes)
         this.reset();
         return this.message = false
 

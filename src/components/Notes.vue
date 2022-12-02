@@ -1,15 +1,20 @@
 <template>
   <div>
     <div class="notes">
-      <div class="note" :class="{full: !grid}" v-for="(note, i) in notes" :key="i">
-        <div class="note-title">
-          <p>{{note.title}}</p>
-          <p style="cursor: pointer;" @click="removeNote(i)">X</p>
-        </div>
-        <div class="note-description"><p>{{note.description}}</p></div>
-        <div class="note-date"><span>{{note.date}}</span></div>
+      <div class="note"
+           :class="{full: !grid , high: note.highPriority, veryHigh: note.veryHighPriority, low: note.lowPriority}"
+           v-for="(note, i) in notes"
+           :key="i">
+<!--        <div class="priority" :class="{high: }">-->
+          <div class="note-title"> <p>{{ note.title }}</p>
+        <p style="cursor: pointer;" @click="removeNote(i)">X</p>
+
       </div>
-    </div>
+      <div class="note-description"><p>{{ note.description }}</p></div>
+      <div class="note-date"><span>{{ note.date }}</span></div>
+<!--    </div>-->
+  </div>
+  </div>
   </div>
 </template>
 
@@ -23,7 +28,7 @@ export default {
     grid: {
       type: Boolean,
       require: true
-    }
+    },
   },
   methods: {
     removeNote (i) {
@@ -41,6 +46,7 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 40px 0;
+
 }
 .note {
   width: 46%;
@@ -51,6 +57,15 @@ export default {
   &:hover {
     box-shadow: 0 30px 30px rgba(0,0,0,0.04);
     transform: translate(0, -6px);
+  }
+  &.veryHigh {
+    background-color: #b53f3f;
+  }
+  &.high {
+    background-color: orange;
+  }
+  &.low {
+    background-color: #8bc34a;
   }
   &.full {
     width: 100%;
@@ -69,6 +84,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  &.high {
+    background-color: orange;
+  }
 
   h1 {
     font-size: 32px;
