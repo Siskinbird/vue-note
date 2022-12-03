@@ -5,16 +5,17 @@
            :class="{full: !grid , high: note.highPriority, veryHigh: note.veryHighPriority, low: note.lowPriority}"
            v-for="(note, i) in notes"
            :key="i">
-<!--        <div class="priority" :class="{high: }">-->
-          <div class="note-title"> <p>{{ note.title }}</p>
-        <p style="cursor: pointer;" @click="removeNote(i)">X</p>
+        <div class="note-title"><p>{{ note.title }}</p>
+          <p style="cursor: pointer;" @click="removeNote(i)">X</p>
 
+        </div>
+        <div class="note-description">
+          <p>{{ note.description }}</p>
+        </div>
+        <div class="note-date"><span>{{ note.date }}</span>
+        </div>
       </div>
-      <div class="note-description"><p>{{ note.description }}</p></div>
-      <div class="note-date"><span>{{ note.date }}</span></div>
-<!--    </div>-->
-  </div>
-  </div>
+    </div>
   </div>
 </template>
 
@@ -41,15 +42,17 @@ export default {
 
 <style lang="scss">
 .notes {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto auto;
+  //display: flex;
+  //align-items: center;
+  //justify-content: space-between;
+  //flex-wrap: wrap;
   padding: 40px 0;
-
+  gap: 30px;
 }
 .note {
-  width: 46%;
+  //width: 46%;
   padding: 18px 20px;
   margin-bottom: 20px;
   background-color: #ffffff;

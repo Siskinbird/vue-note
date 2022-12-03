@@ -2,16 +2,11 @@
   <div class="new-note">
     <label for="">Title</label>
     <input v-model="note.title" type="text" value="">
-    <button v-bind="note.highPriority" @click="note.highPriority = true">Hi priority</button>
-    <button v-bind="note.veryHighPriority" @click="note.veryHighPriority = true"> VERY Hi priority</button>
-    <button v-bind="note.lowPriority" @click="note.lowPriority = true"> no priority</button>
-
-<!--      <button :class="high" @click="setHigh" >Important</button>-->
-<!--      <button :class="{low: note.low}" @click="setLow">Not important</button>-->
-
-
+    <button @click="setHigh">Hi priority</button>
+    <button @click="setLow"> no priority</button>
+    <button @click="setVeryHigh">Very Hi priority</button>
     <label for="">Description</label>
-    <textarea v-model="note.description" ></textarea>
+    <textarea v-model="note.description"></textarea>
     <button class="btn btnPrimary" @click="addNote">Post</button>
   </div>
 </template>
@@ -28,15 +23,15 @@ export default {
     addNote() {
       this.$emit('addNote', this.note)
     },
-    setVeryHigh() {
-      this.$emit('very', this.note)
-    },
     setHigh() {
       this.$emit('setHigh', this.note)
     },
     setLow() {
-      this.$emit('low', this.note)
+      this.$emit('setLow', this.note)
     },
+    setVeryHigh() {
+      this.$emit('setVeryHigh', this.note)
+    }
   }
 }
 </script>
@@ -54,14 +49,14 @@ export default {
     height: 20px;
   }
 
-    .high {
-      background-color: #b53f3f;
-    }
+  .high {
+    background-color: #b53f3f;
+  }
   .low {
     background-color: #8bc34a;
   }
 
-  .veryHi,  {
+  .veryHi {
     border-radius: 5px;
     cursor: pointer;
     padding: 5px;
