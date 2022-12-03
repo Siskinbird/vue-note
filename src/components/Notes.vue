@@ -44,10 +44,6 @@ export default {
 .notes {
   display: grid;
   grid-template-columns: auto auto;
-  //display: flex;
-  //align-items: center;
-  //justify-content: space-between;
-  //flex-wrap: wrap;
   padding: 40px 0;
   gap: 30px;
 }
