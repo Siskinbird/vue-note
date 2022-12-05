@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="notes">
-      <div class="note"
+      <div class="note" @click="closeInput"
            :class="{full: !grid , high: note.highPriority, veryHigh: note.veryHighPriority, low: note.lowPriority}"
            v-for="(note, i) in notes"
            :key="i">
         <div class="note-title">
-          <p style="cursor: pointer;" @click="editNote(i)">{{ note.title }}</p>
+          <p v-if="note.isEdit === false" style="cursor: pointer;" @click="editNote(i)">{{ note.title }}</p>
           <input class="edit-note" :class="{isEdit:  note.isEdit}" v-model="note.title" type="text" value="">
           <p style="cursor: pointer;" @click="removeNote(i)">X</p>
 
@@ -15,6 +15,7 @@
           <p>{{ note.description }}</p>
         </div>
         <div class="note-date"><span>{{ note.date }}</span>
+          <div  @click="closeInput">Close</div>
         </div>
       </div>
     </div>
@@ -39,6 +40,9 @@ export default {
     },
     editNote(i) {
       this.$emit('editNote', i)
+    },
+    closeInput() {
+      this.$emit("closeInput")
     }
   }
 }

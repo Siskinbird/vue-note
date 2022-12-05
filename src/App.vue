@@ -51,7 +51,11 @@
               </div>
             </div>
                   <!--note list-->
-            <Notes :notes="notesFilter" :grid="grid" @remove="removeNote" @editNote="editNote" />
+            <Notes :notes="notesFilter"
+                   :grid="grid"
+                   @remove="removeNote"
+                   @editNote="editNote"
+                   @closeInput="closeInput"/>
           </div>
         </div>
       </section>
@@ -141,10 +145,13 @@ export default {
       this.note.lowPriority = true;
     },
     setVeryHigh() {
-      this.note.veryHighPriority = true;
+      this.note.veryHighPriority = !this.note.veryHighPriority;
     },
     editNote(i) {
       this.notes[i].isEdit = true;
+    },
+    closeInput() {
+      this.note.isEdit = true;
     },
     reset() {
       this.note.title = '';
