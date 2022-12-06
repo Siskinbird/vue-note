@@ -4,73 +4,75 @@
       <section>
         <div class="container">
           <div id="app">
+            <h1 style="text-align: center; font-size: 32px; color: #877CC0; font-weight: 500" >{{ title }}</h1>
 
-                  <!--message-->
+            <!--message-->
             <Message v-if="message" :message="message"/>
 
-                  <!--new note-->
+            <!--new note-->
             <NewNote :note="note"
-                     @addNote="addNote"
-                     @setVeryHigh="setVeryHigh"
-                     @setHigh="setHigh"
-                     @setLow="setLow"
-            />
-                  <!--note title-->
-            <div class="note-title">
-              <h1>{{ title }}</h1>
-            </div>
+
+            @addNote="addNote" />
+<!--             FOR PRIORITY BUTTONS-->
+<!--            @setVeryHigh="setVeryHigh"-->
+<!--            @setHigh="setHigh"-->
+<!--            @setLow="setLow"-->
+
+            <!--note title-->
+
             <div class="search-icons-container">
+              <h2 class="note-title">{{ title }}</h2>
 
               <!--search-->
               <Search :search="search"
-                      @search="search = $event"
-                      placeholder="Find your note"
-                      value=""
+              @search="search = $event"
+              placeholder="Find your note"
+              value=""
               />
 
               <!--icons-->
               <div class="icons">
                 <svg :class="{active: grid}" @click="grid = true" xmlns="http://www.w3.org/2000/svg" width="24"
-                     height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="7" height="7"></rect>
-                  <rect x="14" y="3" width="7" height="7"></rect>
-                  <rect x="14" y="14" width="7" height="7"></rect>
-                  <rect x="3" y="14" width="7" height="7"></rect>
-                </svg>
-                <svg :class="{active: !grid}" @click="grid = false" xmlns="http://www.w3.org/2000/svg" width="24"
-                     height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="8" y1="6" x2="21" y2="6"></line>
-                  <line x1="8" y1="12" x2="21" y2="12"></line>
-                  <line x1="8" y1="18" x2="21" y2="18"></line>
-                  <line x1="3" y1="6" x2="3" y2="6"></line>
-                  <line x1="3" y1="12" x2="3" y2="12"></line>
-                  <line x1="3" y1="18" x2="3" y2="18"></line>
-                </svg>
-              </div>
-            </div>
-                  <!--note list-->
-            <Notes :notes="notesFilter"
-                   :grid="grid"
-                   @remove="removeNote"
-                   @editNote="editNote"
-                   @closeInput="closeInput"/>
+
+                height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              <svg :class="{active: !grid}" @click="grid = false" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3" y2="6"></line>
+              <line x1="3" y1="12" x2="3" y2="12"></line>
+              <line x1="3" y1="18" x2="3" y2="18"></line>
+            </svg>
+
           </div>
         </div>
-      </section>
+        <!--note list-->
+        <Notes :notes="notesFilter"
+        :grid="grid"
+        @remove="removeNote"
+        @editNote="editNote"
+        @closeInput="closeInput"/>
+        </div>
     </div>
-  </div>
+  </section>
+</div>
+</div>
 </template>
-
 <script>
-
 
 import Message from "@/components/Message";
 import NewNote from "@/components/NewNote";
 import Notes from "@/components/Notes";
 import Search from "@/components/Search";
-import notes from "@/components/Notes";
+
 
 export default {
   components: {Notes, NewNote, Message, Search},
@@ -83,37 +85,52 @@ export default {
       note: {
         title: '',
         description: '',
-        highPriority: false,
-        lowPriority: false,
-        veryHighPriority: false,
-        isEdit: false
+
+        // FOR PRIORITY BUTTONS
+        // highPriority: false,
+        // lowPriority: false,
+        // veryHighPriority: false,
+        isEdit: false,
+        radios: 'Базовый'
+
       },
       notes: [
         {
           title: 'First note',
           description: 'Desc for first note',
-          highPriority: true,
-          lowPriority: false,
-          veryHighPriority: false,
+
+          // FOR PRIORITY BUTTONS
+          // highPriority: true,
+          // lowPriority: false,
+          // veryHighPriority: false,
           isEdit: false,
+          radios: 'Высокий',
+
           date: new Date(Date.now()).toLocaleString()
         },
         {
           title: 'Second note',
           description: 'Desc for Second note',
-          highPriority: false,
-          lowPriority: true,
-          veryHighPriority: false,
+
+          // FOR PRIORITY BUTTONS
+          // highPriority: false,
+          // lowPriority: true,
+          // veryHighPriority: false,
           isEdit: false,
+          radios: 'Важное',
+
           date: new Date(Date.now()).toLocaleString()
 
         },
         {
           title: 'Third note',
           description: 'Desc for Third note',
-          highPriority: false,
-          lowPriority: false,
-          veryHighPriority: true,
+
+          // FOR PRIORITY BUTTONS
+          // highPriority: false,
+          // lowPriority: false,
+          // veryHighPriority: true,
+
           isEdit: false,
           date: new Date(Date.now()).toLocaleString()
         },
@@ -138,30 +155,36 @@ export default {
     }
   },
   methods: {
-    setHigh() {
-      this.note.highPriority = true;
-    },
-    setLow() {
-      this.note.lowPriority = true;
-    },
-    setVeryHigh() {
-      this.note.veryHighPriority = !this.note.veryHighPriority;
-    },
+    //FUNCTIONS FOR PRIORITY BUTTONS
+    // setHigh() {
+    //   this.note.highPriority = true;
+    // },
+    // setLow() {
+    //   this.note.lowPriority = true;
+    // },
+    // setVeryHigh() {
+    //   this.note.veryHighPriority = !this.note.veryHighPriority;
+    // },
     editNote(i) {
       this.notes[i].isEdit = true;
     },
-    closeInput() {
-      this.note.isEdit = true;
+
+    closeInput(i) {
+      this.notes[i].isEdit = false;
+
     },
     reset() {
       this.note.title = '';
       this.note.description = '';
-      this.note.highPriority = false;
-      this.note.lowPriority = false;
-      this.note.veryHighPriority = false;
+      this.note.radios = 'Базовый'
+      //RESET FOR PRIORITY BUTTONS
+      // this.note.highPriority = false;
+      // this.note.lowPriority = false;
+      // this.note.veryHighPriority = false;
     },
     addNote() {
-      let {title, description, highPriority, lowPriority, veryHighPriority, isEdit} = this.note;
+
+      let {title, description, highPriority, lowPriority, veryHighPriority, radios} = this.note;
 
       if (title === '' || description === '') {
         this.message = 'You note is empty';
@@ -170,14 +193,16 @@ export default {
         this.notes.push({
           title,
           description,
-          highPriority,
-          lowPriority,
-          veryHighPriority,
-          isEdit: false,
-          date: new Date(Date.now()).toLocaleString()
 
+          //FOR PRIORITY BUTTONS
+          // highPriority,
+          // lowPriority,
+          // veryHighPriority,
+          isEdit: false,
+          radios,
+
+          date: new Date(Date.now()).toLocaleString()
         })
-        console.log(this.notes)
         this.reset();
         return this.message = false
       }
@@ -187,21 +212,28 @@ export default {
     },
   }
 }
-
-
 </script>
 
-<style lang="scss">
- .search-icons-container {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
- }
- .icons svg{
-   margin-left: 10px;
- }
 
- .note-title {
-   text-align: center;
- }
+<style lang="scss" scoped>
+.search-icons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.icons svg{
+  margin-left: 10px;
+  cursor: pointer;
+  &:hover {
+    color: #877CC0;
+  }
+  &.active {
+    color: #877CC0;
+  }
+}
+.note-title {
+  text-align: center;
+  font-size: 24px;
+}
 </style>
+

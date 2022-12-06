@@ -1,21 +1,27 @@
 <template>
   <div>
     <div class="notes">
-      <div class="note" @click="closeInput"
-           :class="{full: !grid , high: note.highPriority, veryHigh: note.veryHighPriority, low: note.lowPriority}"
+
+      <div class="note"
+           :class="{full: !grid , high: note.radios === 'Высокий', veryHigh: note.radios === 'Важное', low: note.radios === 'Базовый'}"
+
            v-for="(note, i) in notes"
            :key="i">
         <div class="note-title">
           <p v-if="note.isEdit === false" style="cursor: pointer;" @click="editNote(i)">{{ note.title }}</p>
           <input class="edit-note" :class="{isEdit:  note.isEdit}" v-model="note.title" type="text" value="">
-          <p style="cursor: pointer;" @click="removeNote(i)">X</p>
+
+          <p style="cursor: pointer; margin-left: 10px" @click="removeNote(i)">X</p>
 
         </div>
-        <div class="note-description">
-          <p>{{ note.description }}</p>
+        <div @click="closeInput(i)">
+          <div class="note-description">
+            <p>{{ note.description }}</p>
+          </div>
+          <div class="note-date"><span>{{ note.date }}</span>
         </div>
-        <div class="note-date"><span>{{ note.date }}</span>
-          <div  @click="closeInput">Close</div>
+
+
         </div>
       </div>
     </div>
@@ -41,14 +47,21 @@ export default {
     editNote(i) {
       this.$emit('editNote', i)
     },
-    closeInput() {
-      this.$emit("closeInput")
+
+    closeInput(i) {
+      this.$emit("closeInput", i)
+
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
+input {
+  margin-bottom: 0;
+  padding: 10px;
+}
 
 .notes {
   display: flex;
@@ -57,6 +70,12 @@ export default {
   flex-wrap: wrap;
   padding: 40px 0;
 
+}
+
+.note {
+  input {
+    padding-right: 10px;
+  }
 }
 
 .note {
@@ -71,10 +90,10 @@ export default {
     transform: translate(0, -6px);
   }
   &.veryHigh {
-    background-color: #b53f3f;
+    background-color:  #FFE4E1;
   }
   &.high {
-    background-color: orange;
+    background-color: #FAE7B5;
   }
   &.low {
     background-color: #ffffff;
@@ -93,18 +112,11 @@ export default {
     color: #999999;
   }
 }
-
 .note-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  &.high {
-    background-color: orange;
-  }
 
-  h1 {
-    font-size: 32px;
-  }
   p {
     font-weight: 600;
     color: #333333;
@@ -124,5 +136,6 @@ export default {
     display: block;
   }
 }
+
 
 </style>
