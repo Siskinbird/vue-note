@@ -1,11 +1,13 @@
 <template>
   <div>
     <div class="notes">
-      <div class="note"
+      <div class="note" @click="closeInput"
            :class="{full: !grid , high: note.highPriority, veryHigh: note.veryHighPriority, low: note.lowPriority}"
            v-for="(note, i) in notes"
            :key="i">
-        <div class="note-title"><p>{{ note.title }}</p>
+        <div class="note-title">
+          <p v-if="note.isEdit === false" style="cursor: pointer;" @click="editNote(i)">{{ note.title }}</p>
+          <input class="edit-note" :class="{isEdit:  note.isEdit}" v-model="note.title" type="text" value="">
           <p style="cursor: pointer;" @click="removeNote(i)">X</p>
 
         </div>
@@ -13,6 +15,7 @@
           <p>{{ note.description }}</p>
         </div>
         <div class="note-date"><span>{{ note.date }}</span>
+          <div  @click="closeInput">Close</div>
         </div>
       </div>
     </div>
@@ -34,21 +37,27 @@ export default {
   methods: {
     removeNote (i) {
       this.$emit('remove', i)
-      // console.log(`Note id - ${i} removed`)
+    },
+    editNote(i) {
+      this.$emit('editNote', i)
+    },
+    closeInput() {
+      this.$emit("closeInput")
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .notes {
-  display: grid;
-  grid-template-columns: auto auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   padding: 40px 0;
-  gap: 30px;
 }
 .note {
-  //width: 46%;
+  width: 46%;
   padding: 18px 20px;
   margin-bottom: 20px;
   background-color: #ffffff;
@@ -64,21 +73,22 @@ export default {
     background-color: orange;
   }
   &.low {
-    background-color: #8bc34a;
+    background-color: #ffffff;
   }
   &.full {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     text-align: center;
   }
   p {
-    margin: 20px 0;
+    margin: 10px 0;
   }
   span {
     font-size: 14px;
     color: #999999;
   }
 }
-
 .note-title {
   display: flex;
   align-items: center;
@@ -86,7 +96,6 @@ export default {
   &.high {
     background-color: orange;
   }
-
   h1 {
     font-size: 32px;
   }
@@ -103,5 +112,10 @@ export default {
     }
   }
 }
-
+.edit-note {
+  display: none;
+  &.isEdit {
+    display: block;
+  }
+}
 </style>

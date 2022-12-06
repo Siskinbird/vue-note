@@ -5,68 +5,70 @@
         <div class="container">
           <div id="app">
 
-                  <!--message-->
+            <!--message-->
             <Message v-if="message" :message="message"/>
 
-                  <!--new note-->
+            <!--new note-->
             <NewNote :note="note"
-                     @addNote="addNote"
-                     @setVeryHigh="setVeryHigh"
-                     @setHigh="setHigh"
-                     @setLow="setLow"
+            @addNote="addNote"
+            @setVeryHigh="setVeryHigh"
+            @setHigh="setHigh"
+            @setLow="setLow"
             />
-                  <!--note title-->
-            <div class="note-title" style="margin-top: 20px">
+            <!--note title-->
+            <div class="note-title">
               <h1>{{ title }}</h1>
+            </div>
+            <div class="search-icons-container">
 
-
-                 <!--search-->
+              <!--search-->
               <Search :search="search"
-                      @search="search = $event"
-                      placeholder="Find your note"
-                      value=""
+              @search="search = $event"
+              placeholder="Find your note"
+              value=""
               />
 
-
+              <!--icons-->
               <div class="icons">
                 <svg :class="{active: grid}" @click="grid = true" xmlns="http://www.w3.org/2000/svg" width="24"
-                     height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="7" height="7"></rect>
-                  <rect x="14" y="3" width="7" height="7"></rect>
-                  <rect x="14" y="14" width="7" height="7"></rect>
-                  <rect x="3" y="14" width="7" height="7"></rect>
-                </svg>
-                <svg :class="{active: !grid}" @click="grid = false" xmlns="http://www.w3.org/2000/svg" width="24"
-                     height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="8" y1="6" x2="21" y2="6"></line>
-                  <line x1="8" y1="12" x2="21" y2="12"></line>
-                  <line x1="8" y1="18" x2="21" y2="18"></line>
-                  <line x1="3" y1="6" x2="3" y2="6"></line>
-                  <line x1="3" y1="12" x2="3" y2="12"></line>
-                  <line x1="3" y1="18" x2="3" y2="18"></line>
-                </svg>
-              </div>
-            </div>
-
-                  <!--note list-->
-            <Notes :notes="notesFilter" :grid="grid" @remove="removeNote" />
+                height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              <svg :class="{active: !grid}" @click="grid = false" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3" y2="6"></line>
+              <line x1="3" y1="12" x2="3" y2="12"></line>
+              <line x1="3" y1="18" x2="3" y2="18"></line>
+            </svg>
           </div>
         </div>
-      </section>
+        <!--note list-->
+        <Notes :notes="notesFilter"
+        :grid="grid"
+        @remove="removeNote"
+        @editNote="editNote"
+        @closeInput="closeInput"/>
+        </div>
     </div>
-  </div>
+  </section>
+</div>
+</div>
 </template>
-
 <script>
-
 
 import Message from "@/components/Message";
 import NewNote from "@/components/NewNote";
 import Notes from "@/components/Notes";
 import Search from "@/components/Search";
-import notes from "@/components/Notes";
+
 
 export default {
   components: {Notes, NewNote, Message, Search},
@@ -82,6 +84,7 @@ export default {
         highPriority: false,
         lowPriority: false,
         veryHighPriority: false,
+        isEdit: false
       },
       notes: [
         {
@@ -90,6 +93,7 @@ export default {
           highPriority: true,
           lowPriority: false,
           veryHighPriority: false,
+          isEdit: false,
           date: new Date(Date.now()).toLocaleString()
         },
         {
@@ -98,6 +102,7 @@ export default {
           highPriority: false,
           lowPriority: true,
           veryHighPriority: false,
+          isEdit: false,
           date: new Date(Date.now()).toLocaleString()
         },
         {
@@ -106,6 +111,7 @@ export default {
           highPriority: false,
           lowPriority: false,
           veryHighPriority: true,
+          isEdit: false,
           date: new Date(Date.now()).toLocaleString()
         },
       ]
@@ -136,7 +142,13 @@ export default {
       this.note.lowPriority = true;
     },
     setVeryHigh() {
-      this.note.veryHighPriority = true;
+      this.note.veryHighPriority = !this.note.veryHighPriority;
+    },
+    editNote(i) {
+      this.notes[i].isEdit = true;
+    },
+    closeInput() {
+      this.note.isEdit = true;
     },
     reset() {
       this.note.title = '';
@@ -147,7 +159,6 @@ export default {
     },
     addNote() {
       let {title, description, highPriority, lowPriority, veryHighPriority} = this.note;
-
       if (title === '' || description === '') {
         this.message = 'You note is empty';
         return true
@@ -158,8 +169,8 @@ export default {
           highPriority,
           lowPriority,
           veryHighPriority,
+          isEdit: false,
           date: new Date(Date.now()).toLocaleString()
-
         })
         console.log(this.notes)
         this.reset();
@@ -171,10 +182,18 @@ export default {
     },
   }
 }
-
-
 </script>
 
-<style>
-
+<style lang="scss">
+.search-icons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.icons svg{
+  margin-left: 10px;
+}
+.note-title {
+  text-align: center;
+}
 </style>
