@@ -11,6 +11,7 @@
 
             <!--new note-->
             <NewNote :note="note"
+
             @addNote="addNote" />
 <!--             FOR PRIORITY BUTTONS-->
 <!--            @setVeryHigh="setVeryHigh"-->
@@ -21,6 +22,7 @@
 
             <div class="search-icons-container">
               <h2 class="note-title">{{ title }}</h2>
+
               <!--search-->
               <Search :search="search"
               @search="search = $event"
@@ -31,6 +33,7 @@
               <!--icons-->
               <div class="icons">
                 <svg :class="{active: grid}" @click="grid = true" xmlns="http://www.w3.org/2000/svg" width="24"
+
                 height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="3" width="7" height="7"></rect>
@@ -48,6 +51,7 @@
               <line x1="3" y1="12" x2="3" y2="12"></line>
               <line x1="3" y1="18" x2="3" y2="18"></line>
             </svg>
+
           </div>
         </div>
         <!--note list-->
@@ -81,43 +85,52 @@ export default {
       note: {
         title: '',
         description: '',
+
         // FOR PRIORITY BUTTONS
         // highPriority: false,
         // lowPriority: false,
         // veryHighPriority: false,
         isEdit: false,
         radios: 'Базовый'
+
       },
       notes: [
         {
           title: 'First note',
           description: 'Desc for first note',
+
           // FOR PRIORITY BUTTONS
           // highPriority: true,
           // lowPriority: false,
           // veryHighPriority: false,
           isEdit: false,
           radios: 'Высокий',
+
           date: new Date(Date.now()).toLocaleString()
         },
         {
           title: 'Second note',
           description: 'Desc for Second note',
+
           // FOR PRIORITY BUTTONS
           // highPriority: false,
           // lowPriority: true,
           // veryHighPriority: false,
           isEdit: false,
           radios: 'Важное',
+
           date: new Date(Date.now()).toLocaleString()
+
         },
         {
           title: 'Third note',
           description: 'Desc for Third note',
+
           // FOR PRIORITY BUTTONS
           // highPriority: false,
           // lowPriority: false,
           // veryHighPriority: true,
+
           isEdit: false,
           date: new Date(Date.now()).toLocaleString()
         },
@@ -155,8 +168,10 @@ export default {
     editNote(i) {
       this.notes[i].isEdit = true;
     },
+
     closeInput(i) {
       this.notes[i].isEdit = false;
+
     },
     reset() {
       this.note.title = '';
@@ -168,7 +183,9 @@ export default {
       // this.note.veryHighPriority = false;
     },
     addNote() {
+
       let {title, description, highPriority, lowPriority, veryHighPriority, radios} = this.note;
+
       if (title === '' || description === '') {
         this.message = 'You note is empty';
         return true
@@ -176,12 +193,14 @@ export default {
         this.notes.push({
           title,
           description,
+
           //FOR PRIORITY BUTTONS
           // highPriority,
           // lowPriority,
           // veryHighPriority,
           isEdit: false,
           radios,
+
           date: new Date(Date.now()).toLocaleString()
         })
         this.reset();
@@ -194,6 +213,7 @@ export default {
   }
 }
 </script>
+
 
 <style lang="scss" scoped>
 .search-icons-container {
@@ -216,3 +236,4 @@ export default {
   font-size: 24px;
 }
 </style>
+

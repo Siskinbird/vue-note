@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 svg {
   color: #e4e4e4;
 }
@@ -61,7 +61,7 @@ input {
   border-radius: 30px;
   color: #909399;
   font-size: 16px;
-  min-width: 400px;
+  max-width: 100%;
   height: auto;
 }
 

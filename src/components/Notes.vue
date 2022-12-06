@@ -1,14 +1,18 @@
 <template>
   <div>
     <div class="notes">
+
       <div class="note"
            :class="{full: !grid , high: note.radios === 'Высокий', veryHigh: note.radios === 'Важное', low: note.radios === 'Базовый'}"
+
            v-for="(note, i) in notes"
            :key="i">
         <div class="note-title">
           <p v-if="note.isEdit === false" style="cursor: pointer;" @click="editNote(i)">{{ note.title }}</p>
           <input class="edit-note" :class="{isEdit:  note.isEdit}" v-model="note.title" type="text" value="">
+
           <p style="cursor: pointer; margin-left: 10px" @click="removeNote(i)">X</p>
+
         </div>
         <div @click="closeInput(i)">
           <div class="note-description">
@@ -16,6 +20,8 @@
           </div>
           <div class="note-date"><span>{{ note.date }}</span>
         </div>
+
+
         </div>
       </div>
     </div>
@@ -41,24 +47,29 @@ export default {
     editNote(i) {
       this.$emit('editNote', i)
     },
+
     closeInput(i) {
       this.$emit("closeInput", i)
+
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
 input {
   margin-bottom: 0;
   padding: 10px;
 }
+
 .notes {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 40px 0;
+
 }
 
 .note {
@@ -68,6 +79,7 @@ input {
 }
 
 .note {
+
   width: 46%;
   padding: 18px 20px;
   margin-bottom: 20px;
@@ -124,4 +136,6 @@ input {
     display: block;
   }
 }
+
+
 </style>

@@ -2,6 +2,7 @@
   <div class="new-note">
     <label for="">Title</label>
     <input v-model="note.title" type="text" value="">
+
 <!--    <div class="priority-button">-->
 <!--      <button class="highPriority" @click="setHigh">High</button>-->
 <!--      <button class="lowPriority" @click="setLow">Base</button>-->
@@ -18,6 +19,7 @@
       <label>
         <input type="radio" v-model="note.radios" value="Важное">Важное
       </label>
+
     </div>
 
     <label for="">Description</label>
@@ -53,6 +55,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
 .radio-title {
   font-size: 16px;
   font-weight: 500;
@@ -62,6 +65,7 @@ export default {
 .radios {
   label {
     display: inline-block;
+
   }
 }
 
@@ -70,6 +74,7 @@ export default {
   input {
     margin-bottom: 0;
   }
+
 }
 //.priority {
 //  display: flex;
