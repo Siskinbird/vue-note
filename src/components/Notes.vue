@@ -2,20 +2,20 @@
   <div>
     <div class="notes">
       <div class="note"
-           :class="{full: !grid , high: note.highPriority, veryHigh: note.veryHighPriority, low: note.lowPriority}"
+           :class="{full: !grid , high: note.radios === 'Высокий', veryHigh: note.radios === 'Важное', low: note.radios === 'Базовый'}"
            v-for="(note, i) in notes"
            :key="i">
         <div class="note-title">
           <p v-if="note.isEdit === false" style="cursor: pointer;" @click="editNote(i)">{{ note.title }}</p>
           <input class="edit-note" :class="{isEdit:  note.isEdit}" v-model="note.title" type="text" value="">
-          <p style="cursor: pointer;" @click="removeNote(i)">X</p>
-
+          <p style="cursor: pointer; margin-left: 10px" @click="removeNote(i)">X</p>
         </div>
-        <div class="note-description">
-          <p>{{ note.description }}</p>
+        <div @click="closeInput(i)">
+          <div class="note-description">
+            <p>{{ note.description }}</p>
+          </div>
+          <div class="note-date"><span>{{ note.date }}</span>
         </div>
-        <div class="note-date"><span>{{ note.date }}</span>
-          <div @click="closeInput(i)">Close</div>
         </div>
       </div>
     </div>
@@ -49,6 +49,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+input {
+  margin-bottom: 0;
+  padding: 10px;
+}
 .notes {
   display: flex;
   align-items: center;
@@ -56,6 +60,13 @@ export default {
   flex-wrap: wrap;
   padding: 40px 0;
 }
+
+.note {
+  input {
+    padding-right: 10px;
+  }
+}
+
 .note {
   width: 46%;
   padding: 18px 20px;
@@ -67,10 +78,10 @@ export default {
     transform: translate(0, -6px);
   }
   &.veryHigh {
-    background-color: #b53f3f;
+    background-color:  #FFE4E1;
   }
   &.high {
-    background-color: orange;
+    background-color: #FAE7B5;
   }
   &.low {
     background-color: #ffffff;
@@ -93,12 +104,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  &.high {
-    background-color: orange;
-  }
-  h1 {
-    font-size: 32px;
-  }
+
   p {
     font-weight: 600;
     color: #333333;

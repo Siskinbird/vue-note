@@ -2,11 +2,22 @@
   <div class="new-note">
     <label for="">Title</label>
     <input v-model="note.title" type="text" value="">
-    <div class="priority-button">
-      <p>Check priority:</p>
-      <button class="highPriority" @click="setHigh">High</button>
-      <button class="lowPriority" @click="setLow">Base</button>
-      <button class="veryPriority" @click="setVeryHigh">Important</button>
+<!--    <div class="priority-button">-->
+<!--      <button class="highPriority" @click="setHigh">High</button>-->
+<!--      <button class="lowPriority" @click="setLow">Base</button>-->
+<!--      <button class="veryPriority" @click="setVeryHigh">Important</button>-->
+<!--    </div>-->
+    <div class="radios">
+      <p class="radio-title">Check priority:</p>
+      <label>
+        <input type="radio" v-model="note.radios" value="Базовый">Базовый
+      </label>
+      <label>
+        <input type="radio" v-model="note.radios" value="Высокий">Высокий
+      </label>
+      <label>
+        <input type="radio" v-model="note.radios" value="Важное">Важное
+      </label>
     </div>
 
     <label for="">Description</label>
@@ -26,51 +37,65 @@ export default {
   methods: {
     addNote() {
       this.$emit('addNote', this.note)
-    },
-    setHigh() {
-      this.$emit('setHigh', this.note)
-    },
-    setLow() {
-      this.$emit('setLow', this.note)
-    },
-    setVeryHigh() {
-      this.$emit('setVeryHigh', this.note)
     }
+    // FUNCTIONS FOR SET PRIORITY BUTTON
+
+    // setHigh() {
+    //   this.$emit('setHigh', this.note)
+    // },
+    // setLow() {
+    //   this.$emit('setLow', this.note)
+    // },
+    // setVeryHigh() {
+    //   this.$emit('setVeryHigh', this.note)
+    // }
   }
 }
 </script>
 <style lang="scss" scoped>
+.radio-title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 20px;
+}
+.radios {
+  label {
+    display: inline-block;
+  }
+}
+
 .new-note {
   text-align: center;
+  input {
+    margin-bottom: 0;
+  }
 }
-.priority {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.test {
-  width: 60px;
-  height: 20px;
-}
-.high {
-  background-color: #b53f3f;
-}
-.low {
-  background-color: #8bc34a;
-}
-.veryHi {
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 5px;
-}
-.priority-button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 20px 0;
-}
+//.priority {
+//  display: flex;
+//  align-items: center;
+//  justify-content: space-between;
+//}
+
+//.high {
+//  background-color: #b53f3f;
+//}
+//.low {
+//  background-color: #8bc34a;
+//}
+//.veryHi {
+//  border-radius: 5px;
+//  cursor: pointer;
+//  padding: 5px;
+//}
+//.priority-button {
+//  display: flex;
+//  align-items: center;
+//  justify-content: space-between;
+//  margin: 20px 0;
+//}
 .highPriority {
-  background-color: orange;
+  background-color: #FAE7B5;
   padding: 10px;
   border-radius: 8px;
   width: 100px;
@@ -84,7 +109,7 @@ export default {
   cursor: pointer;
 }
 .veryPriority {
-  background-color: #b53f3f;
+  background-color: #FFE4E1	;
   padding: 10px;
   border-radius: 8px;
   width: 100px;

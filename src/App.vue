@@ -4,23 +4,23 @@
       <section>
         <div class="container">
           <div id="app">
+            <h1 style="text-align: center; font-size: 32px; color: #877CC0; font-weight: 500" >{{ title }}</h1>
 
             <!--message-->
             <Message v-if="message" :message="message"/>
 
             <!--new note-->
             <NewNote :note="note"
-            @addNote="addNote"
-            @setVeryHigh="setVeryHigh"
-            @setHigh="setHigh"
-            @setLow="setLow"
-            />
-            <!--note title-->
-            <div class="note-title">
-              <h1>{{ title }}</h1>
-            </div>
-            <div class="search-icons-container">
+            @addNote="addNote" />
+<!--             FOR PRIORITY BUTTONS-->
+<!--            @setVeryHigh="setVeryHigh"-->
+<!--            @setHigh="setHigh"-->
+<!--            @setLow="setLow"-->
 
+            <!--note title-->
+
+            <div class="search-icons-container">
+              <h2 class="note-title">{{ title }}</h2>
               <!--search-->
               <Search :search="search"
               @search="search = $event"
@@ -81,36 +81,43 @@ export default {
       note: {
         title: '',
         description: '',
-        highPriority: false,
-        lowPriority: false,
-        veryHighPriority: false,
-        isEdit: false
+        // FOR PRIORITY BUTTONS
+        // highPriority: false,
+        // lowPriority: false,
+        // veryHighPriority: false,
+        isEdit: false,
+        radios: 'Базовый'
       },
       notes: [
         {
           title: 'First note',
           description: 'Desc for first note',
-          highPriority: true,
-          lowPriority: false,
-          veryHighPriority: false,
+          // FOR PRIORITY BUTTONS
+          // highPriority: true,
+          // lowPriority: false,
+          // veryHighPriority: false,
           isEdit: false,
+          radios: 'Высокий',
           date: new Date(Date.now()).toLocaleString()
         },
         {
           title: 'Second note',
           description: 'Desc for Second note',
-          highPriority: false,
-          lowPriority: true,
-          veryHighPriority: false,
+          // FOR PRIORITY BUTTONS
+          // highPriority: false,
+          // lowPriority: true,
+          // veryHighPriority: false,
           isEdit: false,
+          radios: 'Важное',
           date: new Date(Date.now()).toLocaleString()
         },
         {
           title: 'Third note',
           description: 'Desc for Third note',
-          highPriority: false,
-          lowPriority: false,
-          veryHighPriority: true,
+          // FOR PRIORITY BUTTONS
+          // highPriority: false,
+          // lowPriority: false,
+          // veryHighPriority: true,
           isEdit: false,
           date: new Date(Date.now()).toLocaleString()
         },
@@ -135,15 +142,16 @@ export default {
     }
   },
   methods: {
-    setHigh() {
-      this.note.highPriority = true;
-    },
-    setLow() {
-      this.note.lowPriority = true;
-    },
-    setVeryHigh() {
-      this.note.veryHighPriority = !this.note.veryHighPriority;
-    },
+    //FUNCTIONS FOR PRIORITY BUTTONS
+    // setHigh() {
+    //   this.note.highPriority = true;
+    // },
+    // setLow() {
+    //   this.note.lowPriority = true;
+    // },
+    // setVeryHigh() {
+    //   this.note.veryHighPriority = !this.note.veryHighPriority;
+    // },
     editNote(i) {
       this.notes[i].isEdit = true;
     },
@@ -153,12 +161,14 @@ export default {
     reset() {
       this.note.title = '';
       this.note.description = '';
-      this.note.highPriority = false;
-      this.note.lowPriority = false;
-      this.note.veryHighPriority = false;
+      this.note.radios = 'Базовый'
+      //RESET FOR PRIORITY BUTTONS
+      // this.note.highPriority = false;
+      // this.note.lowPriority = false;
+      // this.note.veryHighPriority = false;
     },
     addNote() {
-      let {title, description, highPriority, lowPriority, veryHighPriority} = this.note;
+      let {title, description, highPriority, lowPriority, veryHighPriority, radios} = this.note;
       if (title === '' || description === '') {
         this.message = 'You note is empty';
         return true
@@ -166,13 +176,14 @@ export default {
         this.notes.push({
           title,
           description,
-          highPriority,
-          lowPriority,
-          veryHighPriority,
+          //FOR PRIORITY BUTTONS
+          // highPriority,
+          // lowPriority,
+          // veryHighPriority,
           isEdit: false,
+          radios,
           date: new Date(Date.now()).toLocaleString()
         })
-        console.log(this.notes)
         this.reset();
         return this.message = false
       }
@@ -184,7 +195,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .search-icons-container {
   display: flex;
   align-items: center;
@@ -202,5 +213,6 @@ export default {
 }
 .note-title {
   text-align: center;
+  font-size: 24px;
 }
 </style>

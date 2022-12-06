@@ -43,9 +43,9 @@ svg {
   position: relative;
 }
 .search {
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
+  top: 0;
+  bottom: 0;
+  left: 0;
   position: absolute;
 }
 .search-icon {
@@ -57,7 +57,7 @@ svg {
 }
 input {
   padding: 16px 16px 16px 56px !important;
-  margin-bottom: 0px;
+  margin-bottom: 0;
   border-radius: 30px;
   color: #909399;
   font-size: 16px;
