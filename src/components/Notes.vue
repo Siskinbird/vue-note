@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="notes">
-      <div class="note" @click="closeInput"
+      <div class="note"
            :class="{full: !grid , high: note.highPriority, veryHigh: note.veryHighPriority, low: note.lowPriority}"
            v-for="(note, i) in notes"
            :key="i">
@@ -15,7 +15,7 @@
           <p>{{ note.description }}</p>
         </div>
         <div class="note-date"><span>{{ note.date }}</span>
-          <div  @click="closeInput">Close</div>
+          <div @click="closeInput(i)">Close</div>
         </div>
       </div>
     </div>
@@ -41,8 +41,8 @@ export default {
     editNote(i) {
       this.$emit('editNote', i)
     },
-    closeInput() {
-      this.$emit("closeInput")
+    closeInput(i) {
+      this.$emit("closeInput", i)
     }
   }
 }

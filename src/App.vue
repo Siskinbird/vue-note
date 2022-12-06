@@ -147,8 +147,8 @@ export default {
     editNote(i) {
       this.notes[i].isEdit = true;
     },
-    closeInput() {
-      this.note.isEdit = true;
+    closeInput(i) {
+      this.notes[i].isEdit = false;
     },
     reset() {
       this.note.title = '';
@@ -192,6 +192,13 @@ export default {
 }
 .icons svg{
   margin-left: 10px;
+  cursor: pointer;
+  &:hover {
+    color: #877CC0;
+  }
+  &.active {
+    color: #877CC0;
+  }
 }
 .note-title {
   text-align: center;
