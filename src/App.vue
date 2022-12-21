@@ -13,10 +13,6 @@
             <NewNote :note="note"
 
             @addNote="addNote" />
-<!--             FOR PRIORITY BUTTONS-->
-<!--            @setVeryHigh="setVeryHigh"-->
-<!--            @setHigh="setHigh"-->
-<!--            @setLow="setLow"-->
 
             <!--note title-->
 
@@ -58,6 +54,7 @@
         <Notes :notes="notesFilter"
         :grid="grid"
         @remove="removeNote"
+
         @editNote="editNote"
         @closeInput="closeInput"/>
         </div>
@@ -74,6 +71,8 @@ import Notes from "@/components/Notes";
 import Search from "@/components/Search";
 
 
+
+
 export default {
   components: {Notes, NewNote, Message, Search},
   data() {
@@ -85,39 +84,29 @@ export default {
       note: {
         title: '',
         description: '',
-
-        // FOR PRIORITY BUTTONS
-        // highPriority: false,
-        // lowPriority: false,
-        // veryHighPriority: false,
         isEdit: false,
-        radios: 'Базовый'
-
+        priority: 'base',
+        //TODO import from Priorities component
+        priorities: [
+          {id: 0, alias: 'base', title: 'Simple'},
+          {id: 1, alias: 'medium', title: 'Hard'},
+          {id: 2, alias: 'hard', title: 'Extra hard'},
+        ]
       },
       notes: [
         {
           title: 'First note',
           description: 'Desc for first note',
-
-          // FOR PRIORITY BUTTONS
-          // highPriority: true,
-          // lowPriority: false,
-          // veryHighPriority: false,
           isEdit: false,
-          radios: 'Высокий',
-
+          priority: 'base',
           date: new Date(Date.now()).toLocaleString()
         },
         {
           title: 'Second note',
           description: 'Desc for Second note',
 
-          // FOR PRIORITY BUTTONS
-          // highPriority: false,
-          // lowPriority: true,
-          // veryHighPriority: false,
           isEdit: false,
-          radios: 'Важное',
+          priority: 'medium',
 
           date: new Date(Date.now()).toLocaleString()
 
@@ -126,12 +115,8 @@ export default {
           title: 'Third note',
           description: 'Desc for Third note',
 
-          // FOR PRIORITY BUTTONS
-          // highPriority: false,
-          // lowPriority: false,
-          // veryHighPriority: true,
-
           isEdit: false,
+          priority: 'base',
           date: new Date(Date.now()).toLocaleString()
         },
       ]
@@ -155,16 +140,6 @@ export default {
     }
   },
   methods: {
-    //FUNCTIONS FOR PRIORITY BUTTONS
-    // setHigh() {
-    //   this.note.highPriority = true;
-    // },
-    // setLow() {
-    //   this.note.lowPriority = true;
-    // },
-    // setVeryHigh() {
-    //   this.note.veryHighPriority = !this.note.veryHighPriority;
-    // },
     editNote(i) {
       this.notes[i].isEdit = true;
     },
@@ -173,19 +148,19 @@ export default {
       this.notes[i].isEdit = false;
 
     },
+    //TODO refactor array crunch in priorities
     reset() {
       this.note.title = '';
       this.note.description = '';
-      this.note.radios = 'Базовый'
-      //RESET FOR PRIORITY BUTTONS
-      // this.note.highPriority = false;
-      // this.note.lowPriority = false;
-      // this.note.veryHighPriority = false;
+      this.note.priority = 'base'
+      //      [
+      //   {id: 0, alias: 'base', title: 'Simple'},
+      //   {id: 1, alias: 'medium', title: 'Hard'},
+      //   {id: 2, alias: 'hard', title: 'Extra hard'}
+      // ]
     },
     addNote() {
-
-      let {title, description, highPriority, lowPriority, veryHighPriority, radios} = this.note;
-
+      let {title, description, priority} = this.note;
       if (title === '' || description === '') {
         this.message = 'You note is empty';
         return true
@@ -193,14 +168,8 @@ export default {
         this.notes.push({
           title,
           description,
-
-          //FOR PRIORITY BUTTONS
-          // highPriority,
-          // lowPriority,
-          // veryHighPriority,
           isEdit: false,
-          radios,
-
+          priority,
           date: new Date(Date.now()).toLocaleString()
         })
         this.reset();
@@ -209,7 +178,7 @@ export default {
     },
     removeNote(i) {
       this.notes.splice(i, 1)
-    },
+    }
   }
 }
 </script>

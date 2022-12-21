@@ -3,23 +3,21 @@
     <label for="">Title</label>
     <input v-model="note.title" type="text" value="">
 
-<!--    <div class="priority-button">-->
-<!--      <button class="highPriority" @click="setHigh">High</button>-->
-<!--      <button class="lowPriority" @click="setLow">Base</button>-->
-<!--      <button class="veryPriority" @click="setVeryHigh">Important</button>-->
-<!--    </div>-->
     <div class="radios">
       <p class="radio-title">Check priority:</p>
-      <label>
-        <input type="radio" v-model="note.radios" value="Базовый">Базовый
-      </label>
-      <label>
-        <input type="radio" v-model="note.radios" value="Высокий">Высокий
-      </label>
-      <label>
-        <input type="radio" v-model="note.radios" value="Важное">Важное
-      </label>
 
+      <span v-for="(priority, i) in note.priorities"
+            :key="priority.id">
+<!--        <p> Выбран {{priority.title}} приоритет</p>-->
+         <label>
+          <input
+                 type="radio"
+                 name="priority"
+                 :checked="priority['alias'] === note.priority"
+                 :value="priority.alias"
+                 @click="setPriority(i)">{{priority.title}}
+        </label>
+      </span>
     </div>
 
     <label for="">Description</label>
@@ -29,28 +27,22 @@
 </template>
 
 <script>
+
 export default {
   props: {
     note: {
       type: Object,
       require: true
-    },
+    }
   },
   methods: {
     addNote() {
       this.$emit('addNote', this.note)
-    }
-    // FUNCTIONS FOR SET PRIORITY BUTTON
-
-    // setHigh() {
-    //   this.$emit('setHigh', this.note)
-    // },
-    // setLow() {
-    //   this.$emit('setLow', this.note)
-    // },
-    // setVeryHigh() {
-    //   this.$emit('setVeryHigh', this.note)
-    // }
+    },
+    setPriority(i) {
+         this.note.priority = this.note.priorities[i].alias
+         console.log(this.note.priority);
+       },
   }
 }
 </script>
@@ -74,52 +66,8 @@ export default {
   input {
     margin-bottom: 0;
   }
+}
 
-}
-//.priority {
-//  display: flex;
-//  align-items: center;
-//  justify-content: space-between;
-//}
-
-//.high {
-//  background-color: #b53f3f;
-//}
-//.low {
-//  background-color: #8bc34a;
-//}
-//.veryHi {
-//  border-radius: 5px;
-//  cursor: pointer;
-//  padding: 5px;
-//}
-//.priority-button {
-//  display: flex;
-//  align-items: center;
-//  justify-content: space-between;
-//  margin: 20px 0;
-//}
-.highPriority {
-  background-color: #FAE7B5;
-  padding: 10px;
-  border-radius: 8px;
-  width: 100px;
-  cursor: pointer;
-}
-.lowPriority {
-  background-color: #ffffff;
-  padding: 10px;
-  border-radius: 8px;
-  width: 100px;
-  cursor: pointer;
-}
-.veryPriority {
-  background-color: #FFE4E1	;
-  padding: 10px;
-  border-radius: 8px;
-  width: 100px;
-  cursor: pointer;
-}
 .btn {
   border-radius: 5px;
   padding: 15px 25px;
