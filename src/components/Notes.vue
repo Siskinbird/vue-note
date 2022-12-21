@@ -24,6 +24,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     notes: {
@@ -81,6 +82,7 @@ input {
   margin-bottom: 20px;
   background-color: #ffffff;
   transition: all .25s cubic-bezier(.02, .01, .47, 1);
+  cursor: pointer;
   input {
     padding-right: 10px;
   }
@@ -122,15 +124,16 @@ input {
     display: block;
   }
 }
+.note-priority-base {
+  background-color: #ffffff;
+}
 .note-priority-hard {
   background-color:  #FFE4E1;
 }
 .note-priority-medium {
   background-color: #FAE7B5;
 }
-.note-priority-base {
-  background-color: #ffffff;
-}
+
 
 
 

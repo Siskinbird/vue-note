@@ -85,11 +85,12 @@ export default {
         title: '',
         description: '',
         isEdit: false,
+        priority: 'base',
         //TODO import from Priorities component
         priorities: [
           {id: 0, alias: 'base', title: 'Simple'},
           {id: 1, alias: 'medium', title: 'Hard'},
-          {id: 2, alias: 'hard', title: 'Extra hard'}
+          {id: 2, alias: 'hard', title: 'Extra hard'},
         ]
       },
       notes: [
@@ -97,7 +98,7 @@ export default {
           title: 'First note',
           description: 'Desc for first note',
           isEdit: false,
-          priority: 'hard',
+          priority: 'base',
           date: new Date(Date.now()).toLocaleString()
         },
         {
@@ -151,11 +152,12 @@ export default {
     reset() {
       this.note.title = '';
       this.note.description = '';
-       this.note.priorities = [
-        {id: 0, alias: 'base', title: 'Simple'},
-        {id: 1, alias: 'medium', title: 'Hard'},
-        {id: 2, alias: 'hard', title: 'Extra hard'}
-      ]
+      this.note.priority = 'base'
+      //      [
+      //   {id: 0, alias: 'base', title: 'Simple'},
+      //   {id: 1, alias: 'medium', title: 'Hard'},
+      //   {id: 2, alias: 'hard', title: 'Extra hard'}
+      // ]
     },
     addNote() {
       let {title, description, priority} = this.note;
@@ -167,7 +169,7 @@ export default {
           title,
           description,
           isEdit: false,
-          priority: this.note.priority,
+          priority,
           date: new Date(Date.now()).toLocaleString()
         })
         this.reset();

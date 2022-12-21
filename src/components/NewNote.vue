@@ -13,9 +13,9 @@
           <input
                  type="radio"
                  name="priority"
-                 v-model="priority.alias"
+                 :checked="priority['alias'] === note.priority"
                  :value="priority.alias"
-                 @click="setPriority(i)" >{{priority.title}}
+                 @click="setPriority(i)">{{priority.title}}
         </label>
       </span>
     </div>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     note: {
@@ -65,52 +66,8 @@ export default {
   input {
     margin-bottom: 0;
   }
+}
 
-}
-//.priority {
-//  display: flex;
-//  align-items: center;
-//  justify-content: space-between;
-//}
-
-//.high {
-//  background-color: #b53f3f;
-//}
-//.low {
-//  background-color: #8bc34a;
-//}
-//.veryHi {
-//  border-radius: 5px;
-//  cursor: pointer;
-//  padding: 5px;
-//}
-//.priority-button {
-//  display: flex;
-//  align-items: center;
-//  justify-content: space-between;
-//  margin: 20px 0;
-//}
-.highPriority {
-  background-color: #FAE7B5;
-  padding: 10px;
-  border-radius: 8px;
-  width: 100px;
-  cursor: pointer;
-}
-.lowPriority {
-  background-color: #ffffff;
-  padding: 10px;
-  border-radius: 8px;
-  width: 100px;
-  cursor: pointer;
-}
-.veryPriority {
-  background-color: #FFE4E1	;
-  padding: 10px;
-  border-radius: 8px;
-  width: 100px;
-  cursor: pointer;
-}
 .btn {
   border-radius: 5px;
   padding: 15px 25px;
