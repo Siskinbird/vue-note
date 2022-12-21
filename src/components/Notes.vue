@@ -1,27 +1,22 @@
 <template>
   <div>
-    <div class="notes">
-
+    <div class="notes"
+         :class="{full: !grid}">
       <div class="note"
-           :class="{full: !grid , high: note.radios === 'Высокий', veryHigh: note.radios === 'Важное', low: note.radios === 'Базовый'}"
-
+           :class="`note-priority-${note.priority}`"
            v-for="(note, i) in notes"
            :key="i">
         <div class="note-title">
           <p v-if="note.isEdit === false" style="cursor: pointer;" @click="editNote(i)">{{ note.title }}</p>
           <input class="edit-note" :class="{isEdit:  note.isEdit}" v-model="note.title" type="text" value="">
-
           <p style="cursor: pointer; margin-left: 10px" @click="removeNote(i)">X</p>
-
         </div>
         <div @click="closeInput(i)">
           <div class="note-description">
             <p>{{ note.description }}</p>
           </div>
           <div class="note-date"><span>{{ note.date }}</span>
-        </div>
-
-
+          </div>
         </div>
       </div>
     </div>
@@ -50,7 +45,6 @@ export default {
 
     closeInput(i) {
       this.$emit("closeInput", i)
-
     }
   }
 }
@@ -69,12 +63,14 @@ input {
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 40px 0;
-
-}
-
-.note {
-  input {
-    padding-right: 10px;
+  &.full {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    .note {
+      width: 100%;
+    }
   }
 }
 
@@ -85,25 +81,15 @@ input {
   margin-bottom: 20px;
   background-color: #ffffff;
   transition: all .25s cubic-bezier(.02, .01, .47, 1);
+  input {
+    padding-right: 10px;
+  }
   &:hover {
     box-shadow: 0 30px 30px rgba(0,0,0,0.04);
     transform: translate(0, -6px);
   }
-  &.veryHigh {
-    background-color:  #FFE4E1;
-  }
-  &.high {
-    background-color: #FAE7B5;
-  }
-  &.low {
-    background-color: #ffffff;
-  }
-  &.full {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-  }
+
+
   p {
     margin: 10px 0;
   }
@@ -136,6 +122,16 @@ input {
     display: block;
   }
 }
+.note-priority-hard {
+  background-color:  #FFE4E1;
+}
+.note-priority-medium {
+  background-color: #FAE7B5;
+}
+.note-priority-base {
+  background-color: #ffffff;
+}
+
 
 
 </style>

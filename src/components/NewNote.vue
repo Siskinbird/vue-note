@@ -5,16 +5,19 @@
 
     <div class="radios">
       <p class="radio-title">Check priority:</p>
-      <label>
-        <input type="radio" v-model="note.radios" value="Базовый">Базовый
-      </label>
-      <label>
-        <input type="radio" v-model="note.radios" value="Высокий">Высокий
-      </label>
-      <label>
-        <input type="radio" v-model="note.radios" value="Важное">Важное
-      </label>
 
+      <span v-for="(priority, i) in note.priorities"
+            :key="priority.id">
+<!--        <p> Выбран {{priority.title}} приоритет</p>-->
+         <label>
+          <input
+                 type="radio"
+                 name="priority"
+                 v-model="priority.alias"
+                 :value="priority.alias"
+                 @click="setPriority(i)" >{{priority.title}}
+        </label>
+      </span>
     </div>
 
     <label for="">Description</label>
@@ -29,12 +32,16 @@ export default {
     note: {
       type: Object,
       require: true
-    },
+    }
   },
   methods: {
     addNote() {
       this.$emit('addNote', this.note)
-    }
+    },
+    setPriority(i) {
+         this.note.priority = this.note.priorities[i].alias
+         console.log(this.note.priority);
+       },
   }
 }
 </script>
