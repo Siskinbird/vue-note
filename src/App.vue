@@ -13,10 +13,6 @@
             <NewNote :note="note"
 
             @addNote="addNote" />
-<!--             FOR PRIORITY BUTTONS-->
-<!--            @setVeryHigh="setVeryHigh"-->
-<!--            @setHigh="setHigh"-->
-<!--            @setLow="setLow"-->
 
             <!--note title-->
 
@@ -98,24 +94,14 @@ export default {
         {
           title: 'First note',
           description: 'Desc for first note',
-
-          // FOR PRIORITY BUTTONS
-          // highPriority: true,
-          // lowPriority: false,
-          // veryHighPriority: false,
           isEdit: false,
           radios: 'Высокий',
-
           date: new Date(Date.now()).toLocaleString()
         },
         {
           title: 'Second note',
           description: 'Desc for Second note',
 
-          // FOR PRIORITY BUTTONS
-          // highPriority: false,
-          // lowPriority: true,
-          // veryHighPriority: false,
           isEdit: false,
           radios: 'Важное',
 
@@ -125,11 +111,6 @@ export default {
         {
           title: 'Third note',
           description: 'Desc for Third note',
-
-          // FOR PRIORITY BUTTONS
-          // highPriority: false,
-          // lowPriority: false,
-          // veryHighPriority: true,
 
           isEdit: false,
           date: new Date(Date.now()).toLocaleString()
@@ -155,16 +136,6 @@ export default {
     }
   },
   methods: {
-    //FUNCTIONS FOR PRIORITY BUTTONS
-    // setHigh() {
-    //   this.note.highPriority = true;
-    // },
-    // setLow() {
-    //   this.note.lowPriority = true;
-    // },
-    // setVeryHigh() {
-    //   this.note.veryHighPriority = !this.note.veryHighPriority;
-    // },
     editNote(i) {
       this.notes[i].isEdit = true;
     },
@@ -177,10 +148,7 @@ export default {
       this.note.title = '';
       this.note.description = '';
       this.note.radios = 'Базовый'
-      //RESET FOR PRIORITY BUTTONS
-      // this.note.highPriority = false;
-      // this.note.lowPriority = false;
-      // this.note.veryHighPriority = false;
+
     },
     addNote() {
 
@@ -193,11 +161,6 @@ export default {
         this.notes.push({
           title,
           description,
-
-          //FOR PRIORITY BUTTONS
-          // highPriority,
-          // lowPriority,
-          // veryHighPriority,
           isEdit: false,
           radios,
 

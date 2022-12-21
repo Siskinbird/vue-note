@@ -3,11 +3,6 @@
     <label for="">Title</label>
     <input v-model="note.title" type="text" value="">
 
-<!--    <div class="priority-button">-->
-<!--      <button class="highPriority" @click="setHigh">High</button>-->
-<!--      <button class="lowPriority" @click="setLow">Base</button>-->
-<!--      <button class="veryPriority" @click="setVeryHigh">Important</button>-->
-<!--    </div>-->
     <div class="radios">
       <p class="radio-title">Check priority:</p>
       <label>
