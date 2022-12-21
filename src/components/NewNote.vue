@@ -35,17 +35,6 @@ export default {
     addNote() {
       this.$emit('addNote', this.note)
     }
-    // FUNCTIONS FOR SET PRIORITY BUTTON
-
-    // setHigh() {
-    //   this.$emit('setHigh', this.note)
-    // },
-    // setLow() {
-    //   this.$emit('setLow', this.note)
-    // },
-    // setVeryHigh() {
-    //   this.$emit('setVeryHigh', this.note)
-    // }
   }
 }
 </script>
