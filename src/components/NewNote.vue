@@ -6,7 +6,7 @@
 
     <div class="radios">
       <p class="radio-title">Check priority:</p>
-      <Priorities :priorities="priorities"/>
+      <Priorities :priorities="priorities" />
 
 <!--      <span v-for="(priority, i) in note.priorities"-->
 <!--            :key="priority.id">-->
@@ -32,6 +32,7 @@
 <script>
 import Priorities from "@/components/Priorities";
 export default {
+
   components: {Priorities},
   data() {
     return {

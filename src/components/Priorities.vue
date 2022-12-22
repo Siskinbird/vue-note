@@ -26,15 +26,15 @@ export default {
     }
   },
   methods: {
-    setPriority(i) {
-      // this.$store.dispatch('setPriority', this.note.priorities[i].alias)
-      this.priority = this.priorities[i]
-       //console.log(this.note.priority);
-    },
     // setPriority(i) {
-    //   this.$emit('setPriority', i)
-    //   console.log(this.priority[i]);
+    //   // this.$store.dispatch('setPriority', this.note.priorities[i].alias)
+    //   this.priority = this.priorities[i].alias
+    //    console.log(this.priorities[i].alias);
     // },
+    setPriority(i) {
+      this.$emit('setPriority', i)
+      console.log(this.priorities[i].alias);
+    },
   }
 }
 </script>

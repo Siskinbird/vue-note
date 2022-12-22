@@ -11,9 +11,9 @@
 
             <!--new note-->
             <NewNote :note="note"
-                     @addNote="addNote" />
-<!--                     @setPriority="setPriority"-->
-
+                     @addNote="addNote"
+                     @setPriority="setPriority"
+            />
 
             <!--note title-->
 
@@ -79,14 +79,14 @@ export default {
       message: null,
       grid: true,
       search: '',
-      note: this.$store.getters.getNote,
+      note: null,
       notes: this.notes = this.$store.getters.getNotes
     }
   },
   //TODO зачем нужен криэйтед если можно сразу в дату???
   created() {
     //this.notes = this.$store.getters.getNotes
-    // this.note = this.$store.getters.getNote
+     this.note = this.$store.getters.getNote
   },
 
   computed: {
@@ -110,11 +110,11 @@ export default {
     editNote(i) {
       this.notes[i].isEdit = true;
     },
-    // setPriority(i) {
-    //   // this.$store.dispatch('setPriority', this.note.priorities[i].alias)
-    //   this.note.priority = this.note.priorities[i].alias
-    //  // console.log(this.note.priority);
-    // },
+    setPriority(i) {
+      // this.$store.dispatch('setPriority', this.note.priorities[i].alias)
+      this.note.priority = this.note.priorities[i].alias
+     // console.log(this.note.priority);
+    },
     closeInput(i) {
       this.notes[i].isEdit = false;
     },
