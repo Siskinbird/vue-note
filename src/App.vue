@@ -11,8 +11,9 @@
 
             <!--new note-->
             <NewNote :note="note"
-
-            @addNote="addNote" />
+                     @addNote="addNote"
+                     @setPriority="setPriority"
+            />
 
             <!--note title-->
 
@@ -54,7 +55,6 @@
         <Notes :notes="notesFilter"
         :grid="grid"
         @remove="removeNote"
-
         @editNote="editNote"
         @closeInput="closeInput"/>
         </div>
@@ -70,10 +70,8 @@ import NewNote from "@/components/NewNote";
 import Notes from "@/components/Notes";
 import Search from "@/components/Search";
 
-
-
-
 export default {
+
   components: {Notes, NewNote, Message, Search},
   data() {
     return {
@@ -81,47 +79,16 @@ export default {
       message: null,
       grid: true,
       search: '',
-      note: {
-        title: '',
-        description: '',
-        isEdit: false,
-        priority: 'base',
-        //TODO import from Priorities component
-        priorities: [
-          {id: 0, alias: 'base', title: 'Simple'},
-          {id: 1, alias: 'medium', title: 'Hard'},
-          {id: 2, alias: 'hard', title: 'Extra hard'},
-        ]
-      },
-      notes: [
-        {
-          title: 'First note',
-          description: 'Desc for first note',
-          isEdit: false,
-          priority: 'base',
-          date: new Date(Date.now()).toLocaleString()
-        },
-        {
-          title: 'Second note',
-          description: 'Desc for Second note',
-
-          isEdit: false,
-          priority: 'medium',
-
-          date: new Date(Date.now()).toLocaleString()
-
-        },
-        {
-          title: 'Third note',
-          description: 'Desc for Third note',
-
-          isEdit: false,
-          priority: 'base',
-          date: new Date(Date.now()).toLocaleString()
-        },
-      ]
+      note: this.$store.getters.getNote,
+      notes: this.notes = this.$store.getters.getNotes
     }
   },
+  //TODO зачем нужен криэйтед если можно сразу в дату???
+  created() {
+    //this.notes = this.$store.getters.getNotes
+    // this.note = this.$store.getters.getNote
+  },
+
   computed: {
     notesFilter() {
       let array = this.notes,
@@ -143,21 +110,22 @@ export default {
     editNote(i) {
       this.notes[i].isEdit = true;
     },
+    setPriority(i) {
+
+      // this.$store.dispatch('setPriority', this.note.priorities[i].alias)
+      this.note.priority = this.note.priorities[i].alias
+      console.log(this.note.priority);
+    },
 
     closeInput(i) {
       this.notes[i].isEdit = false;
 
     },
-    //TODO refactor array crunch in priorities
+
     reset() {
       this.note.title = '';
       this.note.description = '';
       this.note.priority = 'base'
-      //      [
-      //   {id: 0, alias: 'base', title: 'Simple'},
-      //   {id: 1, alias: 'medium', title: 'Hard'},
-      //   {id: 2, alias: 'hard', title: 'Extra hard'}
-      // ]
     },
     addNote() {
       let {title, description, priority} = this.note;

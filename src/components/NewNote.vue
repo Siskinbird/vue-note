@@ -11,11 +11,11 @@
 <!--        <p> Выбран {{priority.title}} приоритет</p>-->
          <label>
           <input
-                 type="radio"
-                 name="priority"
-                 :checked="priority['alias'] === note.priority"
-                 :value="priority.alias"
-                 @click="setPriority(i)">{{priority.title}}
+              type="radio"
+              name="priority"
+              :checked="priority['alias'] === note.priority"
+              :value="priority.alias"
+              @click="setPriority(i)">{{priority.title}}
         </label>
       </span>
     </div>
@@ -27,7 +27,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     note: {
@@ -40,9 +39,9 @@ export default {
       this.$emit('addNote', this.note)
     },
     setPriority(i) {
-         this.note.priority = this.note.priorities[i].alias
-         console.log(this.note.priority);
-       },
+      this.$emit('setPriority', i)
+      console.log(this.note.priority);
+    },
   }
 }
 </script>
