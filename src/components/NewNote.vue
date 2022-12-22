@@ -3,12 +3,15 @@
     <label for="">Title</label>
     <input v-model="note.title" type="text" value="">
 
+
     <div class="radios">
       <p class="radio-title">Check priority:</p>
 
       <span v-for="(priority, i) in note.priorities"
             :key="priority.id">
+
 <!--        <p> Выбран {{priority.title}} приоритет</p>-->
+
          <label>
           <input
               type="radio"
@@ -27,7 +30,9 @@
 </template>
 
 <script>
+import Priorities from "@/components/Priorities";
 export default {
+  components: {Priorities},
   props: {
     note: {
       type: Object,
@@ -52,12 +57,6 @@ export default {
   font-weight: 500;
   line-height: 24px;
   margin: 20px;
-}
-.radios {
-  label {
-    display: inline-block;
-
-  }
 }
 
 .new-note {

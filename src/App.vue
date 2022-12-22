@@ -111,17 +111,13 @@ export default {
       this.notes[i].isEdit = true;
     },
     setPriority(i) {
-
       // this.$store.dispatch('setPriority', this.note.priorities[i].alias)
       this.note.priority = this.note.priorities[i].alias
       console.log(this.note.priority);
     },
-
     closeInput(i) {
       this.notes[i].isEdit = false;
-
     },
-
     reset() {
       this.note.title = '';
       this.note.description = '';
