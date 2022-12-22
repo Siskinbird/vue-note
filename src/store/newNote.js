@@ -44,14 +44,14 @@ export default {
     },
 
     mutations: {
-        setPriority(state, alias) {
-            state.note.priority = state.priorities[alias]
-        }
+        // setPriority(state, alias) {
+        //     state.note.priority = state.priorities[alias]
+        // }
     },
     actions: {
-        setPriority({commit}, payload) {
-            commit('setPriority', payload)
-        }
+        // setPriority({commit}, payload) {
+        //     commit('setPriority', payload)
+        // }
     },
     getters: {
         getNotes(state) {

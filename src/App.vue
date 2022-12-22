@@ -11,9 +11,9 @@
 
             <!--new note-->
             <NewNote :note="note"
-                     @addNote="addNote"
-                     @setPriority="setPriority"
-            />
+                     @addNote="addNote" />
+<!--                     @setPriority="setPriority"-->
+
 
             <!--note title-->
 
@@ -110,11 +110,11 @@ export default {
     editNote(i) {
       this.notes[i].isEdit = true;
     },
-    setPriority(i) {
-      // this.$store.dispatch('setPriority', this.note.priorities[i].alias)
-      this.note.priority = this.note.priorities[i].alias
-      console.log(this.note.priority);
-    },
+    // setPriority(i) {
+    //   // this.$store.dispatch('setPriority', this.note.priorities[i].alias)
+    //   this.note.priority = this.note.priorities[i].alias
+    //  // console.log(this.note.priority);
+    // },
     closeInput(i) {
       this.notes[i].isEdit = false;
     },

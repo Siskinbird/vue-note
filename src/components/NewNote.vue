@@ -6,21 +6,21 @@
 
     <div class="radios">
       <p class="radio-title">Check priority:</p>
+      <Priorities :priorities="priorities"/>
 
-      <span v-for="(priority, i) in note.priorities"
-            :key="priority.id">
+<!--      <span v-for="(priority, i) in note.priorities"-->
+<!--            :key="priority.id">-->
+<!--&lt;!&ndash;        <p> Выбран {{priority.title}} приоритет</p>&ndash;&gt;-->
 
-<!--        <p> Выбран {{priority.title}} приоритет</p>-->
-
-         <label>
-          <input
-              type="radio"
-              name="priority"
-              :checked="priority['alias'] === note.priority"
-              :value="priority.alias"
-              @click="setPriority(i)">{{priority.title}}
-        </label>
-      </span>
+<!--         <label>-->
+<!--          <input-->
+<!--              type="radio"-->
+<!--              name="priority"-->
+<!--              :checked="priority['alias'] === note.priority"-->
+<!--              :value="priority.alias"-->
+<!--              @click="setPriority(i)">{{priority.title}}-->
+<!--        </label>-->
+<!--      </span>-->
     </div>
 
     <label for="">Description</label>
@@ -33,6 +33,12 @@
 import Priorities from "@/components/Priorities";
 export default {
   components: {Priorities},
+  data() {
+    return {
+      priorities: [...this.$store.getters.getPriorities]
+    }
+
+  },
   props: {
     note: {
       type: Object,
@@ -43,10 +49,10 @@ export default {
     addNote() {
       this.$emit('addNote', this.note)
     },
-    setPriority(i) {
-      this.$emit('setPriority', i)
-      console.log(this.note.priority);
-    },
+    // setPriority(i) {
+    //   this.$emit('setPriority', i)
+    //   console.log(this.note.priority);
+    // },
   }
 }
 </script>
