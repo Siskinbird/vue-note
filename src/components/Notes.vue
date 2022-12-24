@@ -38,14 +38,13 @@ export default {
   },
   methods: {
     removeNote (i) {
-      this.$emit('remove', i)
+      this.$store.dispatch('removeNote', i)
     },
     editNote(i) {
-      this.$emit('editNote', i)
+      this.$store.dispatch('editNote', i)
     },
-
     closeInput(i) {
-      this.$emit("closeInput", i)
+      this.$store.dispatch("closeInput", i)
     }
   }
 }
