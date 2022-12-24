@@ -3,19 +3,23 @@
     <label for="">Title</label>
     <input v-model="note.title" type="text" value="">
 
+
     <div class="radios">
       <p class="radio-title">Check priority:</p>
+<!--      <Priorities :priorities="priorities" />-->
 
       <span v-for="(priority, i) in note.priorities"
             :key="priority.id">
 <!--        <p> Выбран {{priority.title}} приоритет</p>-->
+
          <label>
           <input
-                 type="radio"
-                 name="priority"
-                 :checked="priority['alias'] === note.priority"
-                 :value="priority.alias"
-                 @click="setPriority(i)">{{priority.title}}
+              type="radio"
+              name="priority"
+              :checked="priority['alias'] === note.priority"
+              :value="priority.alias"
+              @click="setPriority(i)">
+           <p>{{priority.title}}</p>
         </label>
       </span>
     </div>
@@ -29,6 +33,7 @@
 <script>
 
 export default {
+
   props: {
     note: {
       type: Object,
@@ -37,12 +42,12 @@ export default {
   },
   methods: {
     addNote() {
-      this.$emit('addNote', this.note)
+      this.$store.dispatch('addNote', this.note)
     },
     setPriority(i) {
-         this.note.priority = this.note.priorities[i].alias
-         console.log(this.note.priority);
-       },
+      this.$store.dispatch('setPriority', i)
+      console.log(this.note.priorities[i].alias);
+    },
   }
 }
 </script>
@@ -53,12 +58,6 @@ export default {
   font-weight: 500;
   line-height: 24px;
   margin: 20px;
-}
-.radios {
-  label {
-    display: inline-block;
-
-  }
 }
 
 .new-note {
