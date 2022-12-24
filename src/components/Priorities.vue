@@ -22,26 +22,17 @@ export default {
     priorities: {
       type: Array,
       required: true,
-      default: []
     }
   },
   methods: {
-    // setPriority(i) {
-    //   // this.$store.dispatch('setPriority', this.note.priorities[i].alias)
-    //   this.priority = this.priorities[i].alias
-    //    console.log(this.priorities[i].alias);
-    // },
     setPriority(i) {
-      this.$emit('setPriority', i)
-      console.log(this.priorities[i].alias);
-    },
+      this.$store.dispatch('setPriority', i)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
-
 
 .priority-item {
   display: inline-block;

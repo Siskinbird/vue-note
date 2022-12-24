@@ -26,7 +26,7 @@
 
     <label for="">Description</label>
     <textarea v-model="note.description"></textarea>
-    <button class="btn blue" @click="addNote">Post</button>
+    <button class="btn blue" @click="validNote">Post</button>
   </div>
 </template>
 
@@ -41,8 +41,27 @@ export default {
     }
   },
   methods: {
-    addNote() {
-      this.$store.dispatch('addNote', this.note)
+    resetNote() {
+      this.note.title = '';
+      this.note.description = '';
+      this.note.priority = 'base'
+    },
+    validNote() {
+      if (this.note.title === '' || this.note.description === '') {
+        this.message = 'You note is empty';
+        console.log('Bzzzzzzzzzzzzzz')
+        return true
+      } else {
+            this.$store.dispatch('addNote', {
+              title: this.note.title,
+              description: this.note.description,
+              isEdit: false,
+              priority: this.note.priority,
+              date: new Date(Date.now()).toLocaleString()
+            })
+        this.resetNote()
+        return this.message = false
+      }
     },
     setPriority(i) {
       this.$store.dispatch('setPriority', i)

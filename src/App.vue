@@ -12,7 +12,6 @@
             <!--new note-->
             <NewNote :note="note"
                      />
-<!--            @addNote="addNote"-->
             <!--note title-->
 
             <div class="search-icons-container">
@@ -74,14 +73,13 @@ export default {
       message: null,
       grid: true,
       search: '',
-      note:  null,
-      notes: null
+      note: this.note = this.$store.getters.getNote,
+      notes: this.notes = this.$store.getters.getNotes
     }
   },
   //TODO зачем нужен криэйтед если можно сразу в дату???
+
   created() {
-    this.notes = this.$store.getters.getNotes
-    this.note = this.$store.getters.getNote
   },
 
   computed: {
@@ -100,32 +98,9 @@ export default {
         return array;
       }
     }
-  },
-  methods: {
-    reset() {
-      this.note.title = '';
-      this.note.description = '';
-      this.note.priority = 'base'
-    },
-    // addNote() {
-    //   let {title, description, priority} = this.note;
-    //   if (title === '' || description === '') {
-    //     this.message = 'You note is empty';
-    //     return true
-    //   } else {
-    //     this.notes.push({
-    //       title,
-    //       description,
-    //       isEdit: false,
-    //       priority,
-    //       date: new Date(Date.now()).toLocaleString()
-    //     })
-    //     this.reset();
-    //     return this.message = false
-    //   }
-    // }
   }
 }
+
 </script>
 
 

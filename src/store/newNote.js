@@ -22,7 +22,6 @@ export default {
         setPriority({commit}, payload) {
             commit('setPriority', payload)
         },
-
     },
     getters: {
         getPriorities(state) {
