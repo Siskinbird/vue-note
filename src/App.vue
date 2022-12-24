@@ -11,10 +11,8 @@
 
             <!--new note-->
             <NewNote :note="note"
-                     @addNote="addNote"
-                     @setPriority="setPriority"
-            />
-
+                     />
+<!--            @addNote="addNote"-->
             <!--note title-->
 
             <div class="search-icons-container">
@@ -53,10 +51,7 @@
         </div>
         <!--note list-->
         <Notes :notes="notesFilter"
-        :grid="grid"
-        @remove="removeNote"
-        @editNote="editNote"
-        @closeInput="closeInput"/>
+        :grid="grid" />
         </div>
     </div>
   </section>
@@ -79,14 +74,14 @@ export default {
       message: null,
       grid: true,
       search: '',
-      note: this.$store.getters.getNote,
-      notes: this.notes = this.$store.getters.getNotes
+      note:  null,
+      notes: null
     }
   },
   //TODO зачем нужен криэйтед если можно сразу в дату???
   created() {
-    //this.notes = this.$store.getters.getNotes
-    // this.note = this.$store.getters.getNote
+    this.notes = this.$store.getters.getNotes
+    this.note = this.$store.getters.getNote
   },
 
   computed: {
@@ -107,42 +102,28 @@ export default {
     }
   },
   methods: {
-    editNote(i) {
-      this.notes[i].isEdit = true;
-    },
-    setPriority(i) {
-      // this.$store.dispatch('setPriority', this.note.priorities[i].alias)
-      this.note.priority = this.note.priorities[i].alias
-      console.log(this.note.priority);
-    },
-    closeInput(i) {
-      this.notes[i].isEdit = false;
-    },
     reset() {
       this.note.title = '';
       this.note.description = '';
       this.note.priority = 'base'
     },
-    addNote() {
-      let {title, description, priority} = this.note;
-      if (title === '' || description === '') {
-        this.message = 'You note is empty';
-        return true
-      } else {
-        this.notes.push({
-          title,
-          description,
-          isEdit: false,
-          priority,
-          date: new Date(Date.now()).toLocaleString()
-        })
-        this.reset();
-        return this.message = false
-      }
-    },
-    removeNote(i) {
-      this.notes.splice(i, 1)
-    }
+    // addNote() {
+    //   let {title, description, priority} = this.note;
+    //   if (title === '' || description === '') {
+    //     this.message = 'You note is empty';
+    //     return true
+    //   } else {
+    //     this.notes.push({
+    //       title,
+    //       description,
+    //       isEdit: false,
+    //       priority,
+    //       date: new Date(Date.now()).toLocaleString()
+    //     })
+    //     this.reset();
+    //     return this.message = false
+    //   }
+    // }
   }
 }
 </script>

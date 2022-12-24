@@ -6,10 +6,10 @@
 
     <div class="radios">
       <p class="radio-title">Check priority:</p>
+<!--      <Priorities :priorities="priorities" />-->
 
       <span v-for="(priority, i) in note.priorities"
             :key="priority.id">
-
 <!--        <p> Выбран {{priority.title}} приоритет</p>-->
 
          <label>
@@ -18,7 +18,8 @@
               name="priority"
               :checked="priority['alias'] === note.priority"
               :value="priority.alias"
-              @click="setPriority(i)">{{priority.title}}
+              @click="setPriority(i)">
+           <p>{{priority.title}}</p>
         </label>
       </span>
     </div>
@@ -30,9 +31,9 @@
 </template>
 
 <script>
-import Priorities from "@/components/Priorities";
+
 export default {
-  components: {Priorities},
+
   props: {
     note: {
       type: Object,
@@ -41,11 +42,11 @@ export default {
   },
   methods: {
     addNote() {
-      this.$emit('addNote', this.note)
+      this.$store.dispatch('addNote', this.note)
     },
     setPriority(i) {
-      this.$emit('setPriority', i)
-      console.log(this.note.priority);
+      this.$store.dispatch('setPriority', i)
+      console.log(this.note.priorities[i].alias);
     },
   }
 }
