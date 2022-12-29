@@ -13,6 +13,7 @@
 <!--        <p> Выбран {{priority.title}} приоритет</p>-->
 
          <label>
+
           <input
               type="radio"
               name="priority"
@@ -32,8 +33,8 @@
 
 <script>
 
-export default {
 
+export default {
   props: {
     note: {
       type: Object,
@@ -45,22 +46,25 @@ export default {
       this.note.title = '';
       this.note.description = '';
       this.note.priority = 'base'
+       // this.note.message = true
     },
     validNote() {
-      if (this.note.title === '' || this.note.description === '') {
-        this.message = 'You note is empty';
-        console.log('Bzzzzzzzzzzzzzz')
-        return true
+
+      //TODO не работает гребанное сообщение
+      let {title, description, priority} = this.note
+      if (title === '' || description === '') {
+        this.note.message = 'You note is empty';
+        // return false
       } else {
-            this.$store.dispatch('addNote', {
-              title: this.note.title,
-              description: this.note.description,
-              isEdit: false,
-              priority: this.note.priority,
-              date: new Date(Date.now()).toLocaleString()
-            })
+        this.$store.dispatch('addNote', {
+          title,
+          description,
+          isEdit: false,
+          priority,
+          date: new Date(Date.now()).toLocaleString()
+        })
         this.resetNote()
-        return this.message = false
+        return true
       }
     },
     setPriority(i) {

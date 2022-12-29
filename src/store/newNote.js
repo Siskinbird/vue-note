@@ -5,6 +5,7 @@ export default {
             description: '',
             isEdit: false,
             priority: 'base',
+            message: null,
             priorities: [
                 {id: 0, alias: 'base', title: 'Simple'},
                 {id: 1, alias: 'medium', title: 'Hard'},
@@ -24,9 +25,6 @@ export default {
         },
     },
     getters: {
-        getPriorities(state) {
-            return state.note.priorities
-        },
         getNote(state) {
             return state.note
         }

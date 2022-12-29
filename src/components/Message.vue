@@ -1,6 +1,6 @@
 <template>
   <div class="message">
-    <p>Message - {{message}}</p>
+    <p>БЛЯЯЯЯЯЯЯЯЯЯЯЯ{{message}}</p>
   </div>
 </template>
 
@@ -16,6 +16,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .message {
+  display: block;
   text-align: center;
   color: #b53f3f;
 }

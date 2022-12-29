@@ -10,8 +10,7 @@
             <Message v-if="message" :message="message"/>
 
             <!--new note-->
-            <NewNote :note="note"
-                     />
+            <NewNote :note="note"/>
             <!--note title-->
 
             <div class="search-icons-container">
@@ -64,6 +63,7 @@ import NewNote from "@/components/NewNote";
 import Notes from "@/components/Notes";
 import Search from "@/components/Search";
 
+
 export default {
 
   components: {Notes, NewNote, Message, Search},
@@ -73,30 +73,14 @@ export default {
       message: null,
       grid: true,
       search: '',
-      note: this.note = this.$store.getters.getNote,
+      note: this.$store.getters.getNote,
       notes: this.notes = this.$store.getters.getNotes
     }
   },
-  //TODO зачем нужен криэйтед если можно сразу в дату???
-
-  created() {
-  },
 
   computed: {
-    notesFilter() {
-      let array = this.notes,
-          search = this.search
-      if (!search) {
-        return array
-      } else {
-        search.trim().toLowerCase()
-        array = array.filter(function (item) {
-          if (item.title.toLowerCase().indexOf(search) !== -1) {
-            return item
-          }
-        })
-        return array;
-      }
+    notesFilter () {
+      return this.$store.getters.getSearchNotes(this.search)
     }
   }
 }

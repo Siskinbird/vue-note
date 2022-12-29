@@ -28,7 +28,7 @@ export default {
                 priority: 'hard',
                 date: new Date(Date.now()).toLocaleString()
             }
-        ],
+        ]
     },
     mutations: {
         editNote(state, index) {
@@ -42,9 +42,9 @@ export default {
         },
         addNote(state, newNote) {
             state.notes.push(newNote)
-        }
-
+        },
     },
+
     actions: {
         editNote({commit}, payload) {
             commit('editNote', payload)
@@ -59,9 +59,24 @@ export default {
             commit('addNote', payload)
         }
     },
+
     getters: {
         getNotes(state) {
             return state.notes
+        },
+        getSearchNotes: state => value => {
+            let array = state.notes
+            if (!value) {
+                return array
+            } else {
+                value = value.trim().toLowerCase()
+                array = array.filter(function (item) {
+                    if (item.title.toLowerCase().indexOf(value) !== -1) {
+                        return item
+                    }
+                })
+                return array;
+            }
         }
     }
 }
