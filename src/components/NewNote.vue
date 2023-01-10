@@ -46,15 +46,15 @@ export default {
       this.note.title = '';
       this.note.description = '';
       this.note.priority = 'base'
-       // this.note.message = true
     },
     validNote() {
 
-      //TODO не работает гребанное сообщение
-      let {title, description, priority} = this.note
+      //TODO не работает сообщение
+      let {title, description, priority} = this.note;
       if (title === '' || description === '') {
-        this.note.message = 'You note is empty';
-        // return false
+        this.message = "Not be empty";
+        console.log(this.message)
+         return false
       } else {
         this.$store.dispatch('addNote', {
           title,

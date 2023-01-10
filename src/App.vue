@@ -74,10 +74,9 @@ export default {
       grid: true,
       search: '',
       note: this.$store.getters.getNote,
-      notes: this.notes = this.$store.getters.getNotes
+      notes: this.$store.getters.getNotes
     }
   },
-
   computed: {
     notesFilter () {
       return this.$store.getters.getSearchNotes(this.search)
